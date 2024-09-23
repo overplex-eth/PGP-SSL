@@ -12,8 +12,9 @@
   "author": "Over Plex",
   "license": "MIT",
   "dependencies": {
+    "inquirer": "^8.0.0",
     "openpgp": "^5.0.0",
-    "inquirer": "^8.0.0"
+    "pgp-ssl": "^1.0.1"
   },
   "repository": {
     "type": "git",
@@ -24,4 +25,3 @@
   },
   "homepage": "https://gitlab.com/over.plex/pgp-ssl"
 }
-

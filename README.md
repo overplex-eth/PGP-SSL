@@ -1,65 +1,54 @@
 # PGP-SSL: SSL Certificates with PGP Key Generation
 
-`pgp-ssl` is a Node.js CLI tool that generates PGP keys using ECC or RSA and creates SSL certificates for use with Apache or Nginx web servers. The tool supports different operating systems such as Debian, Ubuntu, and CentOS.
+`pgp-ssl` is a Node.js CLI tool that generates PGP keys using ECC or RSA and creates SSL certificates for use with Apache or Nginx. It supports Debian, Ubuntu, and CentOS operating systems.
 
 ## Features
 
-- **PGP Key Generation**: Secure PGP key generation using Elliptic Curve Cryptography (ECC) or RSA.
-- **Passphrase Protection**: Optionally encrypt the PGP private key with a passphrase.
-- **SSL Certificate Creation**: Automatically generate and configure SSL certificates for Apache or Nginx.
-- **Cross-Platform Support**: Supports different Linux distributions like Debian, Ubuntu, and CentOS.
+- **PGP Key Generation**: ECC or RSA.
+- **Passphrase Protection**: Optional encryption of the PGP private key.
+- **SSL Certificate Creation**: Automates configuration for Apache or Nginx.
 
 ## Installation
 
-1. Clone the repository or navigate to your project folder.
-2. Install the package globally:
+Install via npm:
 
-   ```bash
-   npm install -g .
-   ```
+```bash
+npm install pgp-ssl
+```
 
-This will register the `pgp-ssl` command globally.
+Run the tool using `npx`:
+
+```bash
+npx pgp-ssl start
+```
 
 ## Usage
 
-### Command Line Interface (CLI)
-
-To display the help menu with available commands:
+To display the help menu:
 
 ```bash
-pgp-ssl help
+npx pgp-ssl help
 ```
 
-### Generate PGP Keys and SSL Certificates
-
-To start generating PGP keys and SSL certificates, use the `start` command:
+To generate PGP keys and SSL certificates:
 
 ```bash
-pgp-ssl start
+npx pgp-ssl start
 ```
 
-You will be prompted to provide the following information:
+You will be prompted for:
+- **Name** (required)
+- **Email** (required)
+- **Passphrase** (optional)
+- **Domain** (required)
+- **Operating System**
+- **Web Server** (Apache or Nginx)
+- **Key Type** (RSA or ECC)
 
-- **Name**: Your name (required)
-- **Email**: Your email (required)
-- **Passphrase**: An optional passphrase to protect your PGP private key (leave empty for no passphrase)
-- **Domain**: The domain name for the SSL certificate (required)
-- **Operating System**: Choose your operating system (Debian, Ubuntu, CentOS, Other)
-- **Web Server**: Choose the web server you are using (Apache or Nginx)
-- **Key Type**: Choose either RSA or ECC for the SSL certificate
-  - If RSA is selected, you'll be asked to choose the RSA bit size (2048, 3072, 4096)
-  - If ECC is selected, you'll be asked to choose the ECC curve (`prime256v1`, `secp384r1`, `secp521r1`)
-
-After providing all inputs, the tool will:
-- Generate PGP keys (public and private).
-- Create an SSL certificate and private key.
-- Generate a configuration file for your chosen web server (Apache or Nginx).
-- Enable the configuration and reload the web server.
-
-### Example Output
+### Example:
 
 ```bash
-pgp-ssl start
+npx pgp-ssl start
 ```
 
 ```text
@@ -71,39 +60,36 @@ Which operating system are you using? Debian
 Which web server are you using? Nginx
 Choose key type for SSL certificate: ECC
 Choose ECC curve: prime256v1
-
-SSL Certificate Generated:
-<Your certificate details>
 ```
 
 ## Dependencies
 
-- **Node.js**: The tool is built with Node.js and requires version 12.x or above.
+- **Node.js**: Requires version 12.x or above.
 - **OpenPGP.js**: For PGP key generation.
-- **OpenSSL**: Used to generate SSL certificates.
+- **OpenSSL**: Used for SSL certificates.
 
-Make sure **OpenSSL** is installed and accessible from the command line.
+Ensure **OpenSSL** is installed and accessible via the command line.
 
-### Installing OpenSSL on Debian/Ubuntu:
+### Installing OpenSSL
 
+For **Debian/Ubuntu**:
 ```bash
 sudo apt-get install openssl
 ```
 
-### Installing OpenSSL on CentOS:
-
+For **CentOS**:
 ```bash
 sudo yum install openssl
 ```
 
 ## Security Considerations
 
-- **Passphrase Protection**: Always use a strong passphrase when generating PGP keys to protect the private key.
-- **Certificate Location**: SSL certificates are stored in `/etc/ssl/` and configuration files in `/etc/apache2/` (for Apache) or `/etc/nginx/` (for Nginx).
+- **Passphrase Protection**: Always use a strong passphrase to protect your PGP private key.
+- **Certificate Location**: Certificates are stored in `/etc/ssl/`, and configuration files are stored in `/etc/apache2/` (for Apache) or `/etc/nginx/` (for Nginx).
 
 ## Contributing
 
-Contributions are welcome! Please submit issues or pull requests to improve the project.
+Fork the repository on GitLab, make your changes, and submit a pull request.
 
 ## License
 
