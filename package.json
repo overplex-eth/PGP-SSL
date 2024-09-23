@@ -1,6 +1,6 @@
 {
   "name": "pgp-ssl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate SSL certificates using PGP key pairs for Apache or Nginx",
   "main": "src/index.js",
   "bin": {
@@ -14,5 +14,14 @@
   "dependencies": {
     "openpgp": "^5.0.0",
     "inquirer": "^8.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/over.plex/pgp-ssl.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/over.plex/pgp-ssl/-/issues"
+  },
+  "homepage": "https://gitlab.com/over.plex/pgp-ssl"
 }
+
