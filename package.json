@@ -1,0 +1,18 @@
+{
+  "name": "pgp-ssl",
+  "version": "1.0.0",
+  "description": "Generate SSL certificates using PGP key pairs for Apache or Nginx",
+  "main": "src/index.js",
+  "bin": {
+    "pgp-ssl": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/cli.js"
+  },
+  "author": "Over Plex",
+  "license": "MIT",
+  "dependencies": {
+    "openpgp": "^5.0.0",
+    "inquirer": "^8.0.0"
+  }
+}

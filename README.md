@@ -1,93 +1,110 @@
-# PGP-SSL
+# PGP-SSL: SSL Certificates with PGP Key Generation
 
+`pgp-ssl` is a Node.js CLI tool that generates PGP keys using ECC or RSA and creates SSL certificates for use with Apache or Nginx web servers. The tool supports different operating systems such as Debian, Ubuntu, and CentOS.
 
+## Features
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/over.plex/pgp-ssl.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/over.plex/pgp-ssl/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- **PGP Key Generation**: Secure PGP key generation using Elliptic Curve Cryptography (ECC) or RSA.
+- **Passphrase Protection**: Optionally encrypt the PGP private key with a passphrase.
+- **SSL Certificate Creation**: Automatically generate and configure SSL certificates for Apache or Nginx.
+- **Cross-Platform Support**: Supports different Linux distributions like Debian, Ubuntu, and CentOS.
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+1. Clone the repository or navigate to your project folder.
+2. Install the package globally:
+
+   ```bash
+   npm install -g .
+   ```
+
+This will register the `pgp-ssl` command globally.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Command Line Interface (CLI)
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+To display the help menu with available commands:
+
+```bash
+pgp-ssl help
+```
+
+### Generate PGP Keys and SSL Certificates
+
+To start generating PGP keys and SSL certificates, use the `start` command:
+
+```bash
+pgp-ssl start
+```
+
+You will be prompted to provide the following information:
+
+- **Name**: Your name (required)
+- **Email**: Your email (required)
+- **Passphrase**: An optional passphrase to protect your PGP private key (leave empty for no passphrase)
+- **Domain**: The domain name for the SSL certificate (required)
+- **Operating System**: Choose your operating system (Debian, Ubuntu, CentOS, Other)
+- **Web Server**: Choose the web server you are using (Apache or Nginx)
+- **Key Type**: Choose either RSA or ECC for the SSL certificate
+  - If RSA is selected, you'll be asked to choose the RSA bit size (2048, 3072, 4096)
+  - If ECC is selected, you'll be asked to choose the ECC curve (`prime256v1`, `secp384r1`, `secp521r1`)
+
+After providing all inputs, the tool will:
+- Generate PGP keys (public and private).
+- Create an SSL certificate and private key.
+- Generate a configuration file for your chosen web server (Apache or Nginx).
+- Enable the configuration and reload the web server.
+
+### Example Output
+
+```bash
+pgp-ssl start
+```
+
+```text
+Enter your name: John Doe
+Enter your email: john@example.com
+Enter a passphrase to protect your private key (leave empty for no passphrase):
+Enter the domain for the SSL certificate: example.com
+Which operating system are you using? Debian
+Which web server are you using? Nginx
+Choose key type for SSL certificate: ECC
+Choose ECC curve: prime256v1
+
+SSL Certificate Generated:
+<Your certificate details>
+```
+
+## Dependencies
+
+- **Node.js**: The tool is built with Node.js and requires version 12.x or above.
+- **OpenPGP.js**: For PGP key generation.
+- **OpenSSL**: Used to generate SSL certificates.
+
+Make sure **OpenSSL** is installed and accessible from the command line.
+
+### Installing OpenSSL on Debian/Ubuntu:
+
+```bash
+sudo apt-get install openssl
+```
+
+### Installing OpenSSL on CentOS:
+
+```bash
+sudo yum install openssl
+```
+
+## Security Considerations
+
+- **Passphrase Protection**: Always use a strong passphrase when generating PGP keys to protect the private key.
+- **Certificate Location**: SSL certificates are stored in `/etc/ssl/` and configuration files in `/etc/apache2/` (for Apache) or `/etc/nginx/` (for Nginx).
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Contributions are welcome! Please submit issues or pull requests to improve the project.
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project is licensed under the MIT License.
