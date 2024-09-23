@@ -1,6 +1,6 @@
 {
   "name": "pgp-ssl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate SSL certificates using PGP key pairs for Apache or Nginx",
   "main": "src/index.js",
   "bin": {
